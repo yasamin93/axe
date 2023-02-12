@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,8 +27,13 @@ public class ImageService {
     }
 
     private static void saveToFileSystem(MultipartFile multipartFile) throws IOException {
-        String dir =  Files.createTempDirectory("tmpDir").toFile().getAbsolutePath();
-        File file = new File(dir + File.pathSeparator + multipartFile.getName());
+
+        Path path = Paths.get("image-files");
+        if (!Files.exists(path)) {
+            Files.createDirectory(path);
+        }
+        String dir = path.toFile().getAbsolutePath();
+        File file = new File(dir + "/" + multipartFile.getOriginalFilename());
         try (OutputStream os = new FileOutputStream(file)) {
             os.write(multipartFile.getBytes());
         }

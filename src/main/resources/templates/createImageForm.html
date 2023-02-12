@@ -1,5 +1,4 @@
 <form action="#" th:action="@{/image}" th:object="${image}" method="post" enctype="multipart/form-data">
-    <p>name: <input type="text" th:field="*{image_name}" /></p>
     <p>document:<input type="file" th:field="*{image}" multiple="multiple"/>
         <input type="submit" value="upload" />
         <input type="reset" value="Reset" /></p>

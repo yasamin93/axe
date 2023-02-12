@@ -11,6 +11,5 @@ import org.springframework.web.multipart.MultipartFile;
 @Builder
 public class Image {
     private Integer id;
-    private String image_name;
     private MultipartFile image;
 }
